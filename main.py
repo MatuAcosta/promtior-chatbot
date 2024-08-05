@@ -11,6 +11,14 @@ class ChatInput(BaseModel):
     input: str
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 @app.post("/chat")
@@ -23,15 +31,6 @@ async def chat(input: ChatInput):
 
 #load static html after post because getting method not allowerd
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://34.228.140.169"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 
 
 if __name__ == "__main__":
