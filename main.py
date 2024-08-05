@@ -11,7 +11,7 @@ class ChatInput(BaseModel):
     input: str
 
 app = FastAPI()
-app.add_middleware(
+app.app_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
