@@ -1,5 +1,4 @@
 import os
-
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.document_loaders import WebBaseLoader
@@ -9,10 +8,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain_core.documents import Document
+from dotenv import load_dotenv
+load_dotenv()
 
-
-
-apikey = "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"
+apikey = os.environ.get("OPEN_AI_KEY") 
 url = "https://www.promtior.ai/"
 llm = ChatOpenAI(api_key=apikey)
 
@@ -32,31 +31,29 @@ def load_page():
     documents = text_splitter.split_documents(docs)
     return documents
 
+# page doesnt have all necessary info so I use about_promtior.txt to complement
 def set_embeddings(): 
     documents = load_page()
+    text_extra_info = load_extra_info()
+    documents.append(Document(page_content=text_extra_info))
     embeddings = OpenAIEmbeddings(openai_api_key=apikey)
     vector = FAISS.from_documents(documents, embeddings)
     return vector
 
 
 def set_prompt():
-    prompt = ChatPromptTemplate.from_template("""The company is Promtior:
-    <context>
-    {context}
-    </context>
-    
-    Question: {input}""")
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "Answer the user's questions based on the below context:\n\n{context}"),
+        ("user", "{input}"),
+    ])
     return prompt
 
 def chat_with_rag(input):
-    #print(input)
-    extra_info = load_extra_info()
-    print("extra_info", extra_info)
     prompt = set_prompt()
     vector = set_embeddings()
     document_chain = create_stuff_documents_chain(llm, prompt)
     retriever = vector.as_retriever()
     retrieval_chain = create_retrieval_chain(retriever, document_chain)
-    response = retrieval_chain.invoke({"input": input, "context": [Document(page_content="Promtior was founded in May 2023")]})
+    response = retrieval_chain.invoke({"input": input, })
     return response["answer"]
 

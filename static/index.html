@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        input{
+            width: 400px;
+            margin: 1rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chat-box"></div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+
+            if (userInput.trim() !== '') {
+                // Add user message to chat box
+                addMessageToChatBox('User', userInput);
+
+                // Send message to the server
+                fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ input: userInput })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Add response from chat
+                    addMessageToChatBox('Chat', data.text);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+                // Clear the input field
+                document.getElementById('user-input').value = '';
+            }
+        }
+
+        function addMessageToChatBox(sender, message) {
+            const chatBox = document.getElementById('chat-box');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = `${sender}: ${message}`;
+            chatBox.appendChild(messageElement);
+            // Scroll to the bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
