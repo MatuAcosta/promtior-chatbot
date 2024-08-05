@@ -2,6 +2,8 @@ from src.rag import chat_with_rag
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+
 
 import uvicorn
 
@@ -9,7 +11,17 @@ class ChatInput(BaseModel):
     input: str
 
 app = FastAPI()
-
+origins = [
+    "http://localhost",
+    "http://34.228.140.169"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/chat")
