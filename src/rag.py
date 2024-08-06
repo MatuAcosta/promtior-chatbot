@@ -16,8 +16,8 @@ url = "https://www.promtior.ai/"
 llm = ChatOpenAI(api_key=apikey)
 
 def load_extra_info():
-    data_path = os.path.join(os.path.dirname(__file__), '.' , 'about_promtior.txt')
-    file = open(data_path, 'r')
+    path = os.path.join(os.path.dirname(__file__), '.' , 'about_promtior.txt')
+    file = open(path, 'r')
     content = file.read()
     file.close()
     return content
