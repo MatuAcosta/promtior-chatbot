@@ -15,6 +15,7 @@ apikey = os.environ.get("OPEN_AI_KEY")
 url = "https://www.promtior.ai/"
 llm = ChatOpenAI(api_key=apikey)
 
+# read extrainfo from about_promtior.txt to complement neccessary info
 def load_extra_info():
     path = os.path.join(os.path.dirname(__file__), '.' , 'about_promtior.txt')
     file = open(path, 'r')
