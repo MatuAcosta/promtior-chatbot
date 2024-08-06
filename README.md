@@ -35,4 +35,4 @@ El chatbot debe poder responder las siguientes preguntas:
    - **Solución**: Fueron solucionados rapidamente pero suelen ser un dolor de cabeza.
 
 ## Link de acceso
-   ###  http://34.228.140.169/ 
+   ### http://3.90.45.237/
