@@ -13,13 +13,13 @@ El chatbot debe poder responder las siguientes preguntas:
 ## Desafíos
 
 ### 1. **Adentrarme en el mundo de la IA y RAG**
-    - Mucha lectura de documentación y algún que otro video para poder entender el funcionamiento de la arquitectura RAG y los diferentes componentes que se pueden encontrar dentro de esta como los vectorstores, LLM, etc. La verdad que es un mundo apasionante y que parece que nunca se termina de aprender.
+   #### Mucha lectura de documentación y algún que otro video para poder entender el funcionamiento de la arquitectura RAG y los diferentes componentes que se pueden encontrar dentro de esta como los vectorstores, LLM, etc. La verdad que es un mundo apasionante y que parece que nunca se termina de aprender.
 
 ### 2.**Presentación del chat**
-    - Decidí avanzar por lo simple y conciso desplegando archivos estaticos gracias a la ayuda de FastAPI.
+   #### Decidí avanzar por lo simple y conciso desplegando archivos estaticos gracias a la ayuda de FastAPI.
 
 ### 3. **Despliegue en AWS**
-   - Al no tener mucha experiencia utilizando estos servicios cloud, es una buena oportunidad para poder utilizarlos y poder aprender algo.
+   ### Al no tener mucha experiencia utilizando estos servicios cloud, es una buena oportunidad para poder utilizarlos y poder aprender algo.
 
 
 
@@ -33,5 +33,5 @@ El chatbot debe poder responder las siguientes preguntas:
    - **Descripción**: Tipicos problemas de cors.
    - **Solución**: Fueron solucionados rapidamente pero suelen ser un dolor de cabeza.
 
-## URL
-    - ** http://34.228.140.169/ **
+## Link de acceso
+   ###  http://34.228.140.169/ 
